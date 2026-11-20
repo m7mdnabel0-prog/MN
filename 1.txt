@@ -1,642 +1,305 @@
-==================================================
-NETWORKS PROGRAMMING - PRACTICAL QUESTIONS
-AL-ESRAA UNIVERSITY
-CYBER SECURITY ENGINEERING DEPARTMENT
-==================================================
+NETWORKS PROGRAMMING - PRACTICAL CODE QUESTIONS FROM THE THREE LABS ONLY
+============================================================
 
-LAB 1: PYTHON SETUP AND ESSENTIAL PYTHON REVIEW
---------------------------------------------------
+LAB 1 - PYTHON SETUP AND ESSENTIAL PYTHON REVIEW
 
-Q1. Write a Python program to display a message and
-check the data type of variables.
+Q1. Write a Python program to define variables and display their data
+types. Code: hostname = “server.example.com” port 
+= 443 timeout = 5.0
+connected = True
 
-ANSWER:
+if port == 443: print(“HTTPS”)
 
-name = "Mohammed"
-age = 20
-grade = 85.5
-passed = True
+print(type(hostname)) print(type(port)) print(type(timeout))
+print(type(connected))
 
-print(name)
-print(age)
-print(grade)
-print(passed)
 
-print(type(name))
-print(type(age))
-print(type(grade))
-print(type(passed))
 
+Q2. Write a Python program that asks the user to enter a hostname and
+port number, then displays them. Code: hostname = 
+input(“Enter
+hostname:”) port = int(input(“Enter port number:”))
 
-Q2. Write a Python program that asks the user to enter
-two numbers and displays their sum.
+print(“Hostname:”, hostname) print(“Port:”, port)
 
-ANSWER:
 
-num1 = int(input("Enter first number: "))
-num2 = int(input("Enter second number: "))
 
-total = num1 + num2
+Q3. Write a Python program to identify the service according to the port
+number using if, elif, and else. Code: port = 443
 
-print("Sum =", total)
+if port == 80: print(“HTTP”) elif port == 443: 
+print(“HTTPS”) else:
+print(“Other service”)
 
 
-Q3. Write a Python program to check whether a number
-is positive, negative, or zero.
 
-ANSWER:
+Q4. Write a Python program that uses a list, tuple, and for loop to
+display port numbers and server information. Code: ports = [21, 22, 80,
+443] server = (“192.168.1.10”, 8080)
 
-number = int(input("Enter a number: "))
+for port in ports: print(port)
 
-if number > 0:
-    print("Positive")
-elif number < 0:
-    print("Negative")
-else:
-    print("Zero")
+print(server[0], server[1])
 
 
-Q4. Write a Python program to check whether a number
-is even or odd.
 
-ANSWER:
+Q5. Write a function that classifies a port number. Code: def
+classify_port(port): if port == 80: return “HTTP” elif port == 443:
+return “HTTPS” return “Other”
 
-number = int(input("Enter a number: "))
+print(classify_port(443))
 
-if number % 2 == 0:
-    print("Even")
-else:
-    print("Odd")
 
 
-Q5. Write a Python program that uses a list, tuple,
-and for loop to display port numbers.
+Q6. Write the statements used to import the socket and ipaddress
+modules. Code: import 
+socket import ipaddress
 
-ANSWER:
 
-ports = [22, 53, 80, 443]
 
-server = ("127.0.0.1", 5000)
+Q7. Write a Python program that handles invalid port input using try and
+except. Code: value = input(“Enter a port number:”)
 
-for port in ports:
-    print("Port:", port)
+try: port = int(value) print(“Valid port:”, port) except ValueError:
+print(“Invalid numeric value”)
 
-print("Server IP:", server[0])
-print("Server Port:", server[1])
 
 
-Q6. Write a function that identifies network services
-according to port numbers.
+Q8. Complete Practical 
+Exercise - Host and Port Information Utility.
+Question: Define service_name(port) for ports 22, 53, 80, and 443. Ask
+for a hostname, display the common ports and services, then ask for
+another port and handle invalid input. Code: def service_name(port): if
+port == 22: return “SSH” elif port == 53: return “DNS” elif port == 80:
+return “HTTP” elif port == 443: return “HTTPS” else: 
+return “Other /
+Unknown”
 
-ANSWER:
+hostname = input(“Enter hostname:”) ports = [22, 53, 80, 443]
 
-def service_name(port):
+print(“Target hostname:”, hostname) print(“Common service ports:”)
 
-    if port == 22:
-        return "SSH"
-    elif port == 53:
-        return "DNS"
-    elif port == 80:
-        return "HTTP"
-    elif port == 443:
-        return "HTTPS"
-    else:
-        return "Other / Unknown"
+for port in ports: print(port, “->”, service_name(port))
 
-print(service_name(443))
+try: selected_port = int(input(“Enter a port 
+number to classify:”))
+print(“Selected service:”, service_name(selected_port)) except
+ValueError: print(“Invalid input: port number must be numeric.”)
 
 
-Q7. Write a Python program using try and except
-to handle invalid integer input.
+============================================================
+LAB 2 -
+HOSTNAME RESOLUTION AND IP ADDRESS MANIPULATION 
+————————————————————
 
-ANSWER:
+Q9. Write a Python program to display the local computer hostname using
+socket. Code: import socket
 
-try:
-    value = input("Enter a number: ")
-    number = int(value)
+hostname = socket.gethostname() print(“Computer Name:”, hostname)
 
-    print("Number:", number)
 
-except ValueError:
-    print("Invalid input! Please enter an integer.")
 
+Q10. Write a Python program to resolve google.com into an IPv4 
+address.
+Code: import socket
 
-Q8. Complete Practical Exercise:
-Write a program that asks for a hostname, displays
-common network ports and their services, and allows
-the user to enter another port.
+hostname = “google.com” ip_address = socket.gethostbyname(hostname)
 
-ANSWER:
+print(“Hostname:”, hostname) print(“IPv4 Address:”, ip_address)
 
-def service_name(port):
 
-    if port == 22:
-        return "SSH"
-    elif port == 53:
-        return "DNS"
-    elif port == 80:
-        return "HTTP"
-    elif port == 443:
-        return "HTTPS"
-    else:
-        return "Other / Unknown"
 
+Q11. Write a Python program to retrieve and display the IP addresses
+associated with google.com 
+using getaddrinfo(). Code: import socket
 
-hostname = input("Enter hostname: ")
+results = socket.getaddrinfo(“google.com”, None)
 
-ports = [22, 53, 80, 443]
+for result in results: print(result[4][0])
 
-print("Hostname:", hostname)
 
-for port in ports:
-    print(port, ":", service_name(port))
 
-try:
-    new_port = int(input("Enter another port: "))
-    print("Service:", service_name(new_port))
+Q12. Write a Python program that asks the user for a hostname, displays
+its IPv4 address, and handles resolution errors. Code: import 
+socket
 
-except ValueError:
-    print("Invalid port number!")
+hostname = input(“Enter a hostname:”)
 
+try: ip = socket.gethostbyname(hostname) print(“IPv4 Address:”, ip)
 
---------------------------------------------------
-LAB 2: HOSTNAME RESOLUTION AND IP ADDRESS
-MANIPULATION
---------------------------------------------------
+except socket.gaierror: print(“Hostname could not be resolved.”)
 
-Q9. Write a Python program to retrieve and display
-the hostname of the local computer.
 
-ANSWER:
 
-import socket
+Q13. Write a Python program to identify the IP version of two 
+IP
+addresses. Code: import ipaddress
 
-hostname = socket.gethostname()
+ip1 = ipaddress.ip_address(“192.168.1.10”) ip2 =
+ipaddress.ip_address(“2001:db8::1”)
 
-print("Computer Name:", hostname)
+print(“First IP version:”, ip1.version) print(“Second IP version:”,
+ip2.version)
 
 
-Q10. Write a Python program to resolve a hostname
-into its IPv4 address.
 
-ANSWER:
+Q14. Write a Python 
+program to validate an IP address entered by the
+user. Code: import ipaddress
 
-import socket
+ip = input(“Enter an IP address:”)
 
-hostname = "google.com"
+try: ipaddress.ip_address(ip) print(“Valid IP address.”)
 
-ip_address = socket.gethostbyname(hostname)
+except ValueError: print(“Invalid IP address.”)
 
-print("Hostname:", hostname)
-print("IP Address:", ip_address)
 
 
-Q11. Write a Python program using getaddrinfo()
-to retrieve IPv4 and IPv6 address information.
+Q15. Write a Python program to display network information 
+for
+192.168.1.0/29. Code: import ipaddress
 
-ANSWER:
+network = ipaddress.ip_network(“192.168.1.0/29”)
 
-import socket
+print(“Network Address:”, network.network_address) print(“Subnet Mask:”,
+network.netmask) print(“Broadcast Address:”, network.broadcast_address)
+print(“Total Addresses:”, 
+network.num_addresses)
 
-hostname = "google.com"
 
-results = socket.getaddrinfo(hostname, None)
 
-for result in results:
-    print(result[4][0])
+Q16. Write a Python program to display all usable host addresses in
+192.168.1.0/29. Code: import ipaddress
 
+network = ipaddress.ip_network(“192.168.1.0/29”)
 
-Q12. Write a Python program to identify whether
-an IP address is IPv4 or IPv6.
+for host in network.hosts(): print(host)
 
-ANSWER:
 
-import ipaddress
 
-ip1 = ipaddress.ip_address("192.168.1.1")
-ip2 = ipaddress.ip_address("2001:db8::1")
+Q17. Write a Python 
+program to check whether 192.168.1.5 belongs to
+192.168.1.0/29. Code: import ipaddress
 
-print("IP:", ip1)
-print("Version:", ip1.version)
+network = ipaddress.ip_network(“192.168.1.0/29”) ip =
+ipaddress.ip_address(“192.168.1.5”)
 
-print("IP:", ip2)
-print("Version:", ip2.version)
+if ip in network: print(“The IP belongs to the network.”) else:
+print(“The IP is outside the 
+network.”)
 
 
-Q13. Write a Python program that asks the user to
-enter an IP address and checks whether it is valid.
 
-ANSWER:
+Q18. Complete Practical Exercise - Hostname and IP Network Information
+Utility. Question: Ask for a hostname or IP address and an IPv4 network.
+Resolve the host, display its IP version and network information, check
+network membership, and handle invalid input. Code: import socket import
+ipaddress
 
-import ipaddress
+host = input(“Enter the hostname or IP address to check:”) net =
+input(“Enter the network address (e.g., 192.168.1.0/29):”)
 
-try:
-    ip = input("Enter IP address: ")
+try: ip = ipaddress.ip_address(socket.gethostbyname(host)) network =
+ipaddress.ip_network(net)
 
-    address = ipaddress.ip_address(ip)
+    if network.version != 4:
+        raise ValueError("IPv4 
+network required.")
 
-    print("Valid IP Address")
-    print("IP Version:", address.version)
-
-except ValueError:
-    print("Invalid IP Address")
-
-
-Q14. Write a Python program to display network
-information for 192.168.1.0/29.
-
-ANSWER:
-
-import ipaddress
-
-network = ipaddress.ip_network("192.168.1.0/29")
-
-print("Network Address:", network.network_address)
-print("Subnet Mask:", network.netmask)
-print("Broadcast Address:", network.broadcast_address)
-print("Total Addresses:", network.num_addresses)
-
-
-Q15. Write a Python program to display all usable
-host addresses in the network 192.168.1.0/29.
-
-ANSWER:
-
-import ipaddress
-
-network = ipaddress.ip_network("192.168.1.0/29")
-
-for host in network.hosts():
-    print(host)
-
-
-Q16. Write a Python program to check whether
-192.168.1.5 belongs to 192.168.1.0/29.
-
-ANSWER:
-
-import ipaddress
-
-ip = ipaddress.ip_address("192.168.1.5")
-
-network = ipaddress.ip_network("192.168.1.0/29")
-
-if ip in network:
-    print("IP belongs to the network")
-else:
-    print("IP does not belong to the network")
-
-
-Q17. Complete Practical Exercise:
-Write a program that asks the user for a hostname
-or IPv4 address and an IPv4 network, resolves the
-hostname, displays network information, and checks
-whether the IP belongs to the network.
-
-ANSWER:
-
-import socket
-import ipaddress
-
-try:
-    host = input("Enter hostname or IPv4 address: ")
-    network_input = input("Enter IPv4 network: ")
-
-    try:
-        ip = ipaddress.ip_address(host)
-    except ValueError:
-        ip = ipaddress.ip_address(
-            socket.gethostbyname(host)
-        )
-
-    network = ipaddress.ip_network(network_input)
-
-    print("IP Address:", ip)
+    print("IPv4 Address:", ip)
     print("IP Version:", ip.version)
-
     print("Network Address:", network.network_address)
     print("Subnet Mask:", network.netmask)
     print("Total Addresses:", network.num_addresses)
 
     if ip in network:
-        print("IP belongs to the network")
-    else:
-        print("IP does not belong to the network")
+        print("The IP belongs to the network.")
+    
+else:
+        print("The IP is outside the network.")
 
-except (ValueError, socket.gaierror):
-    print("Invalid hostname, IP address, or network")
+except socket.gaierror: print(“Hostname or IP address could not be
+resolved.”)
+
+except ValueError: print(“Invalid network address.”)
 
 
---------------------------------------------------
-LAB 3: TCP CLIENT/SERVER SOCKET PROGRAMMING
-- ECHO SERVER
---------------------------------------------------
 
-Q18. Write a Python program to create a TCP socket.
+============================================================
+LAB 3 - 
+TCP
+CLIENT/SERVER SOCKET PROGRAMMING - ECHO SERVER ————————————————————
 
-ANSWER:
 
+Q19. Write a Python program to create a TCP Echo Server that accepts a
+client, receives a message, and sends the same message back. Code:
 import socket
 
-server_socket = socket.socket(
-    socket.AF_INET,
-    socket.SOCK_STREAM
-)
+ip = “127.0.0.1” port = 
+5000
 
-print("TCP Socket Created")
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server_socket.close()
+server.bind((ip, port)) server.listen(1)
+
+print(“Server is waiting for a connection…”)
+
+connection, address = server.accept() print(“Connected to:”, 
+address)
+
+data = connection.recv(1024) print(“Received:”, data.decode())
+
+connection.sendall(data)
+
+connection.close() server.close()
 
 
-Q19. Write a Python program to create a TCP Echo
-Server that receives a message and sends the same
-message back to the client.
 
-ANSWER - SERVER:
-
+Q20. Write a Python program to create a TCP Client that connects to the
+server, sends a message, receives the response, and 
+displays it. Code:
 import socket
 
-server_socket = socket.socket(
-    socket.AF_INET,
-    socket.SOCK_STREAM
-)
+ip = “127.0.0.1” port = 5000
 
-server_socket.bind(("127.0.0.1", 5000))
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server_socket.listen()
+client.connect((ip, port))
 
-print("Server is waiting for a connection...")
+message = “Hello Server” client.sendall(message.encode())
 
-client_socket, address = server_socket.accept()
+response = client.recv(1024) 
+print(“Server response:”,
+response.decode())
 
-print("Connected by:", address)
+client.close()
 
-data = client_socket.recv(1024)
 
-print("Received:", data.decode())
 
-client_socket.sendall(data)
+Q21. Modify the TCP Client program to receive a message from the user
+using input() instead of a fixed message. Code: import socket
 
-client_socket.close()
-server_socket.close()
+ip = “127.0.0.1” port = 5000
 
+client = 
+socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-Q20. Write a Python program to create a TCP Client
-that connects to the server, sends a message, and
-receives the echoed response.
+client.connect((ip, port))
 
-ANSWER - CLIENT:
+message = input(“Enter your message:”) client.sendall(message.encode())
 
-import socket
+response = client.recv(1024) print(“Server response:”,
+response.decode())
 
-client_socket = socket.socket(
-    socket.AF_INET,
-    socket.SOCK_STREAM
-)
+client.close()
 
-client_socket.connect(("127.0.0.1", 5000))
 
-message = "Hello Server"
 
-client_socket.sendall(message.encode())
+Q22. Write the error-handling code used when the TCP client cannot
+connect because the server is not running. Code: try:
+client.connect((ip, port)) except ConnectionRefusedError:
+print(“Connection failed. Start the server first.”) client.close() raise
+SystemExit
 
-data = client_socket.recv(1024)
-
-print("Received from server:", data.decode())
-
-client_socket.close()
-
-
-Q21. Modify the TCP Client program to allow the user
-to enter a message using input().
-
-ANSWER:
-
-import socket
-
-client_socket = socket.socket(
-    socket.AF_INET,
-    socket.SOCK_STREAM
-)
-
-client_socket.connect(("127.0.0.1", 5000))
-
-message = input("Enter your message: ")
-
-client_socket.sendall(message.encode())
-
-data = client_socket.recv(1024)
-
-print("Server Response:", data.decode())
-
-client_socket.close()
-
-
-Q22. Modify the TCP Client program to handle
-connection errors using try and except.
-
-ANSWER:
-
-import socket
-
-client_socket = socket.socket(
-    socket.AF_INET,
-    socket.SOCK_STREAM
-)
-
-try:
-    client_socket.connect(("127.0.0.1", 5000))
-
-    message = input("Enter message: ")
-
-    client_socket.sendall(message.encode())
-
-    data = client_socket.recv(1024)
-
-    print("Server Response:", data.decode())
-
-except ConnectionRefusedError:
-    print("Connection failed! Server is not running.")
-
-except OSError as error:
-    print("Network Error:", error)
-
-finally:
-    client_socket.close()
-
-
-Q23. Write a TCP Echo Server using the with
-statement to automatically close the server socket.
-
-ANSWER:
-
-import socket
-
-with socket.socket(
-    socket.AF_INET,
-    socket.SOCK_STREAM
-) as server_socket:
-
-    server_socket.bind(("127.0.0.1", 5000))
-
-    server_socket.listen()
-
-    print("Server is waiting for a connection...")
-
-    client_socket, address = server_socket.accept()
-
-    with client_socket:
-        print("Connected by:", address)
-
-        data = client_socket.recv(1024)
-
-        print("Received:", data.decode())
-
-        client_socket.sendall(data)
-
-
---------------------------------------------------
-IMPORTANT PRACTICAL MODIFICATIONS
---------------------------------------------------
-
-1. Change the hostname from google.com to another
-   hostname.
-
-2. Change the port number from 5000 to another port.
-   Remember to change it in both server and client.
-
-3. Change the server IP address from 127.0.0.1
-   when the experiment requires another network host.
-
-4. Change the message from "Hello Server" to a
-   message entered by the user.
-
-5. Change the IP address to an invalid address and
-   observe the ValueError.
-
-6. Change the network from 192.168.1.0/29 to another
-   network and observe the results.
-
-7. Change the IP address from 192.168.1.5 to
-   192.168.1.10 and check network membership.
-
-8. Run the client without starting the server and
-   observe the connection error.
-
-9. Start the server before running the client.
-
-10. Change recv(1024) and understand that it receives
-    up to 1024 bytes.
-
-
---------------------------------------------------
-IMPORTANT FUNCTIONS TO REMEMBER
---------------------------------------------------
-
-LAB 1:
-
-print()       : Displays output.
-input()       : Receives user input.
-type()        : Checks the data type.
-int()         : Converts a value to integer.
-if            : Checks a condition.
-elif          : Checks another condition.
-else          : Executes when conditions are false.
-for           : Repeats over a collection.
-def           : Defines a function.
-return        : Returns a value.
-try           : Contains code that may cause an error.
-except        : Handles an exception.
-import        : Imports a module.
-
-
-LAB 2:
-
-socket.gethostname()
-Returns the local computer hostname.
-
-socket.gethostbyname(hostname)
-Resolves a hostname into an IPv4 address.
-
-socket.getaddrinfo(host, port)
-Retrieves address information for a host.
-
-socket.gaierror
-Handles address-resolution errors.
-
-ipaddress.ip_address(value)
-Creates an IP address object.
-
-ipaddress.ip_network(value)
-Creates an IP network object.
-
-.version
-Returns the IP version (4 or 6).
-
-.network_address
-Returns the network address.
-
-.netmask
-Returns the subnet mask.
-
-.broadcast_address
-Returns the broadcast address.
-
-.num_addresses
-Returns the total number of addresses.
-
-.hosts()
-Returns usable host addresses.
-
-address in network
-Checks whether an IP belongs to a network.
-
-
-LAB 3:
-
-socket.socket()
-Creates a socket.
-
-socket.AF_INET
-Uses IPv4.
-
-socket.SOCK_STREAM
-Uses TCP.
-
-bind()
-Assigns an IP address and port to the server.
-
-listen()
-Puts the server into listening mode.
-
-accept()
-Waits for a client connection.
-
-connect()
-Connects the client to the server.
-
-sendall()
-Sends data through the connection.
-
-recv(1024)
-Receives up to 1024 bytes.
-
-encode()
-Converts text into bytes.
-
-decode()
-Converts bytes into text.
-
-close()
-Closes the socket.
-
-settimeout(5)
-Sets a five-second timeout.
-
-setsockopt()
-Configures socket options.
-
-
---------------------------------------------------
-END OF PRACTICAL QUESTIONS
---------------------------------------------------
+============================================================ END
+============================================================
